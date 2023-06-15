@@ -1,0 +1,29 @@
+ALMA pipeline tutorial
+
+Disk space requirements: 
+We expect this tutorial to take up about ~40-50 Gb of disk space. This includes the tar files containing the archive products and raw data for download, which add up to ~4 Gb. After restoring the calibration, the working directory adds up to about ~10 Gb. The restore script needs ~21 Gb of disk space to run, and any additional processing we perform during the tutorials will need an additional ~5-10 Gb of space. 
+To save disk space, participants may consider removing the *.tar files after they’re uncompressed, but please keep in mind that you may need backups in case something goes wrong during calibration or imaging. You may want to keep a copy of the original files in an external hard disk or USB stick in that case, since downloading the files during the workshop may be difficult due to wifi speed and bandwidth. 
+
+CASA version: 
+We will be using CASA 6.4.1-12, which is the current ALMA production version, for the tutorials. Please download the ALMA Pipeline download link for CASA 6.4.1 appropriate for your Operating System (OS) from this link: https://casa.nrao.edu/casa_obtaining.shtml
+The link above also contains more information about which OS versions are supported.  
+
+Browser for viewing weblogs:
+The recommended browser to view weblogs for MacOS and Linux users is Firefox. Chrome and Safari may also work, with some limitations. The following Knowledgebase article has more information: https://help.almascience.org/kb/articles/what-is-the-best-way-to-view-the-weblog
+
+Data download link:
+The data for this tutorial can be downloaded from this link: https://bulk.cv.nrao.edu/almadata/public/SIS2023/ALMA_Pipeline_Tutorial/
+The file ALMA-PL-Tutorial_SISS2023-setup.pdf contains instructions on how to set up for the tutorial. 
+The link also contains the Analysis Utilities package (analysis_utils.tar). Analysis Utilities (or analysisUtils for short) is a small set of Python source code files that provide a number of analysis and plotting utilities. 
+
+Once downloaded, extract the tar ball. From a Unix command line this can be done with:
+$ tar xvf analysis_scripts.tar
+Seven files will be extracted -- a README file, and six python scripts. The README file contains the time and date that the tar ball was generated, which can be useful for reporting bugs. 
+Step 2: Edit your existing casa initialization file (in CASA6: $HOME$/.casa/startup.py) or create a new file if it does not already exist, and add the following:
+import sys
+sys.path.append("/PATH_TO_ANALYSIS_SCRIPTS/")
+import analysisUtils as au
+where /PATH_TO_ANALYSIS_SCRIPTS/ is the path to the directory you just extracted from the tar ball. When this is done, start casapy and you will have access to all the functions contained in the analysisUtils module. 
+Once everything is downloaded and installed, start casa (using casa --pipeline), and confirm that the pipeline tasks are loaded. You should see messages similar to “Loaded CASA tasks from package: hifa” during startup. Check that the plotms and imview commands bring up a GUI, and run au.version() to check if the analysisUtils package is loaded. 
+Please run !update-data in your casa session to ensure that the data repositories are up-to-date. 
+
